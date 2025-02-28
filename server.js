@@ -7,41 +7,44 @@ const app = express();
 
 app.use(express.json()); // Para recibir JSON en las solicitudes
 
-// Ruta para generar PDF con una plantilla específica
 app.post("/generate-pdf", (req, res) => {
     const { template, data } = req.body;
 
-    // Verificar si se especificó una plantilla
     if (!template) {
         return res.status(400).json({ error: "Debes especificar una plantilla." });
     }
 
-    // Construir la ruta del archivo de plantilla
     const templatePath = path.join(__dirname, "templates", `${template}.html`);
 
-    // Verificar si la plantilla existe
     if (!fs.existsSync(templatePath)) {
         return res.status(404).json({ error: `La plantilla '${template}' no existe.` });
     }
 
-    // Leer la plantilla desde el archivo
- let html = fs.readFileSync(templatePath, { encoding: "utf8" });
- 
+    let html = fs.readFileSync(templatePath, { encoding: "utf8" });
 
-
-    // Reemplazar los valores dinámicos en la plantilla
-    for (const key in data) {
-        const regex = new RegExp(`{{${key}}}`, "g");
-        html = html.replace(regex, data[key]);
+    // Construir las filas de la tabla dinámicamente
+    if (data.productos) {
+        let filasHTML = "";
+        data.productos.forEach(producto => {
+            filasHTML += `<tr><td>${producto.nombre}</td><td>${producto.cantidad}</td><td>${producto.precio}</td></tr>`;
+        });
+        html = html.replace("{{filas_tabla}}", filasHTML);
     }
 
-    // Configurar los encabezados para la descarga
+    // Reemplazar otros valores en la plantilla
+    for (const key in data) {
+        if (key !== "productos") { // Evita reemplazar productos directamente
+            const regex = new RegExp(`{{${key}}}`, "g");
+            html = html.replace(regex, data[key]);
+        }
+    }
+
     res.setHeader("Content-Type", "application/pdf");
     res.setHeader("Content-Disposition", "attachment; filename=document.pdf");
 
-    // Convertir HTML a PDF y enviarlo en la respuesta
     wkhtmltopdf(html, { pageSize: "A4" }).pipe(res);
 });
+
 
 // Iniciar el servidor
 app.listen(3000, () => {
