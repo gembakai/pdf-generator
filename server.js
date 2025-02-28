@@ -16,10 +16,9 @@ app.post("/debug", (req, res) => {
 app.post("/generate-pdf", (req, res) => {
     const { template, data } = req.body;
 
-    // DEBUG: Imprimir en consola lo que recibe el servidor
     console.log("JSON recibido:", JSON.stringify(req.body, null, 2));
 
-    if (!template || !data) {
+    if (!template || !data || !data.cliente) {
         return res.status(400).json({ error: "Faltan parámetros en la solicitud." });
     }
 
@@ -30,7 +29,16 @@ app.post("/generate-pdf", (req, res) => {
 
     let html = fs.readFileSync(templatePath, { encoding: "utf8" });
 
-    // Construcción de la tabla de productos
+    // 🔹 ASIGNAR LOGO AUTOMÁTICAMENTE SEGÚN EL CLIENTE
+    const logoMap = {
+        "Publimontajes S.A": "https://i0.wp.com/publiexcr.com/wp-content/uploads/2022/10/logo-color.png",
+        "Exodus Advertising": "https://i0.wp.com/publiexcr.com/wp-content/uploads/2022/10/logo-color.png",
+        "Default": "https://i0.wp.com/publiexcr.com/wp-content/uploads/2022/10/logo-color.png"
+    };
+    const logoURL = logoMap[data.cliente] || logoMap["Default"];
+    html = html.replace("{{logo}}", logoURL);
+
+    // 🔹 CONSTRUIR LA TABLA DE PRODUCTOS
     if (data.productos && Array.isArray(data.productos)) {
         let filasHTML = "";
         data.productos.forEach(producto => {
@@ -41,7 +49,7 @@ app.post("/generate-pdf", (req, res) => {
         return res.status(400).json({ error: "El campo 'productos' está vacío o no es una lista válida." });
     }
 
-    // Reemplazo de otras variables en la plantilla
+    // 🔹 REEMPLAZAR OTRAS VARIABLES EN LA PLANTILLA
     for (const key in data) {
         if (key !== "productos") {
             const regex = new RegExp(`{{${key}}}`, "g");
@@ -49,13 +57,12 @@ app.post("/generate-pdf", (req, res) => {
         }
     }
 
-    
-
     res.setHeader("Content-Type", "application/pdf");
     res.setHeader("Content-Disposition", "attachment; filename=document.pdf");
 
     wkhtmltopdf(html, { pageSize: "A4" }).pipe(res);
 });
+
 
 
 // Iniciar el servidor
