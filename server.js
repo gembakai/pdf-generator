@@ -7,6 +7,12 @@ const app = express();
 
 app.use(express.json()); // Para recibir JSON en las solicitudes
 
+app.post("/debug", (req, res) => {
+    console.log("JSON recibido:", JSON.stringify(req.body, null, 2));
+    res.json({ recibido: req.body });
+});
+
+
 app.post("/generate-pdf", (req, res) => {
     const { template, data } = req.body;
 
