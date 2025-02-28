@@ -49,6 +49,8 @@ app.post("/generate-pdf", (req, res) => {
         }
     }
 
+    
+
     res.setHeader("Content-Type", "application/pdf");
     res.setHeader("Content-Disposition", "attachment; filename=document.pdf");
 
