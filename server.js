@@ -25,7 +25,9 @@ app.post("/generate-pdf", (req, res) => {
     }
 
     // Leer la plantilla desde el archivo
-    let html = fs.readFileSync(templatePath, "utf8");
+ let html = fs.readFileSync(templatePath, { encoding: "utf8" });
+ 
+
 
     // Reemplazar los valores dinámicos en la plantilla
     for (const key in data) {
