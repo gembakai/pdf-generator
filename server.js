@@ -39,23 +39,22 @@ app.post("/generate-pdf", (req, res) => {
     html = html.replace("{{logo}}", logoURL);
 
     // 🔹 CONSTRUIR LA TABLA DE PRODUCTOS
-    if (data.productos && Array.isArray(data.productos)) {
-        let filasHTML = "";
-        data.productos.forEach(producto => {
-            filasHTML += `<tr><td>${producto.nombre}</td><td>${producto.cantidad}</td><td>${producto.precio}</td></tr>`;
-        });
-        html = html.replace("{{filas_tabla}}", filasHTML);
-    } else {
-        return res.status(400).json({ error: "El campo 'productos' está vacío o no es una lista válida." });
+ // 🔹 REEMPLAZAR VARIABLES DINÁMICAS
+ for (const key in data) {
+    if (key !== "lieasodc") {
+        const regex = new RegExp(`{{${key}}}`, "g");
+        html = html.replace(regex, data[key]);
     }
+}
+
 
     // 🔹 REEMPLAZAR OTRAS VARIABLES EN LA PLANTILLA
-    for (const key in data) {
-        if (key !== "productos") {
-            const regex = new RegExp(`{{${key}}}`, "g");
-            html = html.replace(regex, data[key]);
-        }
-    }
+    // for (const key in data) {
+    //     if (key !== "lieasodc") {
+    //         const regex = new RegExp(`{{${key}}}`, "g");
+    //         html = html.replace(regex, data[key]);
+    //     }
+    // }
 
     res.setHeader("Content-Type", "application/pdf");
     res.setHeader("Content-Disposition", "attachment; filename=document.pdf");
