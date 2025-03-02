@@ -18,7 +18,7 @@ app.post("/generate-pdf", (req, res) => {
 
     console.log("JSON recibido:", JSON.stringify(req.body, null, 2));
 
-    if (!template || !data || !data.cliente) {
+    if (!template || !data || !data.empresa) {
         return res.status(400).json({ error: "Faltan parámetros en la solicitud." });
     }
 
@@ -35,7 +35,7 @@ app.post("/generate-pdf", (req, res) => {
         "Exodus Advertising": "https://i0.wp.com/publiexcr.com/wp-content/uploads/2022/10/logo-color.png",
         "Default": "https://i0.wp.com/publiexcr.com/wp-content/uploads/2022/10/logo-color.png"
     };
-    const logoURL = logoMap[data.cliente] || logoMap["Default"];
+    const logoURL = logoMap[data.empresa] || logoMap["Default"];
     html = html.replace("{{logo}}", logoURL);
 
     // 🔹 CONSTRUIR LA TABLA DE PRODUCTOS
