@@ -1,37 +1,667 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orde de compra</title>
     <style>
-        body { font-family: Arial, sans-serif; padding: 20px; }
-        h1 { text-align: center; }
-        .logo-container { text-align: center; margin-bottom: 20px; }
-        .logo { max-width: 150px; max-height: 80px; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { border: 1px solid black; padding: 8px; text-align: left; }
-        th { background-color: #f2f2f2; }
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700&display=swap');
+
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: lightgray;
+
+}
+
+.container {
+    width: 21.6cm;  /* Tamaño de una hoja carta */
+    height: 27.9cm;
+    background-color: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column; /* Organiza .header y el contenido en columna */
+    padding: 40px;
+
+    
+}
+
+.header {
+    width: 100%;
+    height: 3cm;
+    background-color: white;
+    border-bottom: 1px solid rgb(226, 226, 226);
+    box-shadow: 0px 5px 10px rgba(206, 206, 206, 0.2);
+
+    display: flex;
+    flex-direction: row;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25%;
+    height: 100%;
+    background-color: rgb(255, 255, 255);
+    border-bottom: 1px solid rgb(226, 226, 226);
+
+}
+
+.logo img{
+    width: 80%;
+    height: auto;
+    margin-left: 10px;
+}
+
+
+.companydata {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 30%;
+    height: 100%;
+    background-color: rgb(255, 255, 255);
+    border-bottom: 1px solid rgb(226, 226, 226);
+    font-family: 'Nunito', sans-serif;
+    font-size: 16px; /* Ajusta según lo necesites */
+    color: #333; /* Color del texto */
+    line-height: 1.5; /* Espaciado entre líneas */
+    padding-left: 20px;
+
+    
+}
+
+
+
+
+
+.companydata p {
+    margin: 0px 0; /* Reduce el espacio entre párrafos */
+    padding: 0; /* Asegura que no haya relleno adicional */
+}
+
+.empresa {
+    font-weight: normal;
+    color: rgb(156, 156, 156);
+    font-size: 1.5rem;
+}
+
+.direccion {
+    font-size: 0.90rem;
+    color: rgb(156, 156, 156);
+}
+
+.telefono {
+    font-size: 0.90rem;
+    color: rgb(156, 156, 156);
+}
+
+.email {
+    font-size: 0.90rem;
+    text-decoration: underline;
+    color: rgb(156, 156, 156);
+}
+
+
+
+.odcdata {
+    width: 45%;
+    height: 100%;
+    background-color: rgb(255, 255, 255);
+    border-bottom: 1px solid rgb(226, 226, 226);
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    font-family: 'Nunito', sans-serif;
+}
+
+.emision{
+    
+    width: 40%;
+    height: 60%;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    
+}
+
+.titulo{
+    width: 80%;
+    height: 30%;
+    background-color: rgb(235, 235, 235);
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    border-radius: 5px 5px 0 0;
+
+    
+}
+.titulo1{
+    width: 50%;
+    height: 30%;
+    background-color: rgb(225, 55, 55);
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    border-radius: 5px 5px 0 0;
+    
+    color: rgb(255, 255, 255);
+    
+}
+
+
+.titulo p{
+    font-size: 0.7rem;
+    color: rgb(93, 93, 93);
+}
+
+.fecha {
+    width: 80%;
+    height: 100%;
+    background-color: rgb(255, 255, 255);
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    outline: 3px solid rgb(219, 219, 219); /* Borde "interno" */
+    outline-offset: -3px; /* Mueve el borde hacia adentro */
+    border-radius: 0 0 5px 5px;
+}
+.tituloconsecutivo {
+    width: 50%;
+    height: 40%;
+    background-color: rgb(255, 255, 255);
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    outline: 3px solid rgb(219, 219, 219); /* Borde "interno" */
+    outline-offset: -3px; /* Mueve el borde hacia adentro */
+    border-radius: 0 0 5px 5px;
+}
+
+.fecha p{
+    font-size: 0.8rem;
+    color: rgb(93, 93, 93);
+    padding: 0;
+    margin: 0;
+}
+
+.tituloconsecutivo p{
+    font-size: 1.2rem;
+    color: rgb(152, 152, 152);
+    padding: 0;
+    margin: 0;
+}
+
+.consecutivo{
+    
+    width: 60%;
+    height: 80%;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+
+
+.suplier {
+    width: 100%;
+    height: 3cm;
+    background-color: rgb(255, 255, 255);
+    border-bottom: 1px solid rgb(226, 226, 226);
+    justify-content: space-evenly; /* Distribuye los divs a lo largo de la altura */
+    /* box-shadow: 0px 5px 10px rgba(206, 206, 206, 0.2); */
+    
+    display: flex;
+    flex-direction: column;
+}
+
+.linea{
+    font-family: 'Nunito', sans-serif;
+    width: auto;
+    height: 15%;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    
+
+
+}
+
+
+.part{
+    width: auto;
+    height: 100%;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.sub{
+    width: auto;
+    height: 100%;
+    background-color: rgb(240, 240, 240);
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    font-size: 1rem;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.sub p{
+    font-weight: 900;
+}
+
+.name{
+    width: auto;
+    height: 100%;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    font-size: 1rem;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.data{
+    width: 100%;
+    height: auto;
+    background-color: rgb(255, 255, 255);
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+
+}
+
+.barratitulos{
+    width: 100%;
+    height: 30px;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: row;
+    font-family: 'Nunito', sans-serif;
+    justify-content: space-around;
+}
+
+.lineaodc{
+    width: 100%;
+    max-height: 40px;
+    height: auto;
+    min-height: 30px;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: row;
+    font-family: 'Nunito', sans-serif;
+    justify-content: space-around;
+    box-shadow: 0px 0px 5px rgba(178, 178, 178, 0.2);
+}
+
+
+
+
+.titulobarra1, .titulobarra2, .titulobarra4, .titulobarra5, .titulobarra6{
+    height: 100%;
+    width: 88px;
+    max-width: 50%;
+    background-color: rgb(225, 225, 225);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.titulobarra3{
+    height: 100%;
+    width: 350px;
+    background-color: rgb(225, 225, 225);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.titulobarra1, .titulobarra2, .titulobarra4, .titulobarra5, .titulobarra6, .titulobarra3 p{
+    font-size: 0.8rem;
+    color: rgb(93, 93, 93);
+    padding: 0;
+    margin: 0;
+}
+
+
+
+.datobarra1, .datobarra2, .datobarra4, .datobarra5, .datobarra6{
+    height: 100%;
+    width: 88px;
+    max-width: 50%;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.datobarra3{
+    height: 100%;
+    width: 350px;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.datobarra1, .datobarra2, .datobarra4, .datobarra5, .datobarra6, .datobarra3 p{
+    font-size: 0.8rem;
+    color: rgb(93, 93, 93);
+    padding: 0;
+    margin: 0;
+}
+
+
+.lineaodc:nth-child(odd) .datobarra1,
+.lineaodc:nth-child(odd) .datobarra2,
+.lineaodc:nth-child(odd) .datobarra3,
+.lineaodc:nth-child(odd) .datobarra4,
+.lineaodc:nth-child(odd) .datobarra5,
+.lineaodc:nth-child(odd) .datobarra6 {
+    background-color: rgb(245, 245, 245);
+
+}
+
+
+.conclusiones{
+    margin-top: 10px;
+    width: 100%;
+    height: 4cm;
+    background-color: rgb(255, 255, 255);
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.comentarios{
+    width: 60%;
+    height: 100%;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(226, 226, 226);
+    border-radius: 10px;
+    font-family: 'Nunito', sans-serif;
+}
+
+
+.comentarios p {
+    color: rgb(145, 145, 145);
+padding-top: 5px;
+padding-left: 10px;
+padding-right: 10px;
+padding-bottom: 10px;
+    text-align: justify;
+    text-align-last: left;
+    
+    /* Limita la altura del párrafo */
+    max-height: 100px; /* Ajusta según tu diseño */
+    overflow: hidden;
+}
+
+
+.totales{
+    width: 40%;
+    height: 100%;
+    background-color: rgb(13, 141, 26);
+    display: flex;
+    flex-direction: row;
+}
+
+
+.titulostotales, .valorestotales{
+    width: 50%;
+    height: 100%;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+
+.subtotal, .deducciones,.total, .iva, .grantotal{
+    width: 100%;
+    height: 28px;
+    background-color: rgb(236, 236, 236);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Nunito', sans-serif;
+    font-size: 16px; /* Ajusta según lo necesites */
+    color: #333; /* Color del texto */
+    border-radius: 4px;
+}
+ .grantotal{
+
+    background-color: rgb(44, 44, 44);
+    color: #ffffff; /* Color del texto */
+    font-weight:bold
+
+}
+
+.subtotalvalor, .deduccionesvalor, .totalvalor, .ivavalor, .grantotalvalor{
+    width: 100%;
+    height: 28px;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Nunito', sans-serif;
+    font-size: 16px; /* Ajusta según lo necesites */
+    color: #333; /* Color del texto */
+    border-radius: 4px;
+    border: 1px solid rgb(217, 217, 217);
+}
+
+.grantotalvalor{
+
+    background-color: rgb(104, 104, 104);
+    color: #ffffff; /* Color del texto */
+    font-weight:bold;
+    border: 0;
+}
+
     </style>
+
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700&display=swap" rel="stylesheet">
+
 </head>
-<body>
-    <div class="logo-container">
-        <img class="logo" src="{{logo}}" alt="Company Logo">
-    </div>
-    
-    <h1>Factura</h1>
-    <p>Cliente: {{cliente}}</p>
-    <p>Fecha: {{fecha}}</p>
-    
-    <table>
-        <thead>
-            <tr>
-                <th>Producto</th>
-                <th>Cantidad</th>
-                <th>Precio</th>
-            </tr>
-        </thead>
-        <tbody>
-            {{filas_tabla}}
-        </tbody>
-    </table>
+<body>x
+    <div class="container">
+        
+            <div class="header">
+
+                <div class="logo">
+                    <img class="logo" src="{{logo}}" alt="Logo de empresa">   
+                </div>  
+
+                <div class="companydata">
+                    <p class="empresa">{{Empresa}}</p>
+                    <p class="direccion">Cédula Jurídica: {{cedulajuridica}}</p>
+                    <p class="email">Email:{{correocontacto}}</p>
+                    <p class="telefono">Teléfono: +506 {{telefono}}</p>
+                </div>
+
+                <div class="odcdata">
+
+                    <div class="emision">
+                        <div class="titulo">
+                            <p class="titulofecha">Fecha de emisión</p>
+                        </div>
+                        <div class="fecha">
+                            <p class="datofecha">28/02/2022</p>
+                        </div>
+                    </div>
+
+                    <div class="consecutivo">
+                        <div class="titulo1">
+                            <p class="titulofecha">Consecutivo</p>
+                        </div>
+                        <div class="tituloconsecutivo">
+                            <p class="textoconsecutivo">001</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="suplier">
+
+                <div class="linea">
+                  
+                    <div class="part">
+
+                        <div class="sub"><p>Nombre:</p></div>
+                        <div class="name"><p>Publimontajes</p></div>
+            
+                    </div>
+                  
+                    <div class="part">
+
+                        <div class="sub"><p>Moneda:</p></div>
+                        <div class="name"><p>Dólares</p></div>
+            
+                    </div>
+                 
+                </div>
+
+                <div class="linea">
+                  
+                    <div class="part">
+
+                        <div class="sub"><p>Contacto:</p></div>
+                        <div class="name"><p>Wilber Ballestero</p></div>
+            
+                    </div>
+                  
+                    <div class="part">
+
+                        <div class="sub"><p>Correo de contacto:</p></div>
+                        <div class="name"><p>w.ballestero@publiexcr.com</p></div>
+            
+                    </div>
+                 
+                </div>
+                
+                <div class="linea">
+                  
+                    <div class="part">
+
+                        <div class="sub"><p>Correo de facturación:</p></div>
+                        <div class="name"><p>facturaelectronica@publiexcr.com</p></div>
+            
+                    </div>
+                  
+                    <div class="part">
+
+                        <div class="sub"><p>Plazo crédito:</p></div>
+                        <div class="name"><p>30 días</p></div>
+            
+                    </div>
+                 
+                </div>
+                
+            </div>
+
+
+            <div class="data">
+                <div class="barratitulos">
+                    <div class="titulobarra1"><p>ID</p></div>
+                    <div class="titulobarra2"><p>Cantidad</p></div>
+                    <div class="titulobarra3"><p>Descripción</p></div>
+                    <div class="titulobarra4"><p>CC</p></div>
+                    <div class="titulobarra5"><p>Costo U.</p></div>
+                    <div class="titulobarra6"><p>Subtotal</p></div>
+                </div>
+                <div class="lineaodc">
+                    <div class="datobarra1"><p>1</p></div>
+                    <div class="datobarra2"><p>4.00</p></div>
+                    <div class="datobarra3"><p>Lámina Galvanizada</p></div>
+                    <div class="datobarra4"><p>001</p></div>
+                    <div class="datobarra5"><p>¢2.500,00</p></div>
+                    <div class="datobarra6"><p>¢10.000,00</p></div>
+                </div>
+                <div class="lineaodc">
+                    <div class="datobarra1"><p>1</p></div>
+                    <div class="datobarra2"><p>4.00</p></div>
+                    <div class="datobarra3"><p>Lámina Galvanizada</p></div>
+                    <div class="datobarra4"><p>001</p></div>
+                    <div class="datobarra5"><p>¢2.500,00</p></div>
+                    <div class="datobarra6"><p>¢10.000,00</p></div>
+                </div>
+                <div class="lineaodc">
+                    <div class="datobarra1"><p>1</p></div>
+                    <div class="datobarra2"><p>4.00</p></div>
+                    <div class="datobarra3"><p>Lámina Galvanizada</p></div>
+                    <div class="datobarra4"><p>001</p></div>
+                    <div class="datobarra5"><p>¢2.500,00</p></div>
+                    <div class="datobarra6"><p>¢10.000,00</p></div>
+                </div>
+                <div class="lineaodc">
+                    <div class="datobarra1"><p>1</p></div>
+                    <div class="datobarra2"><p>4.00</p></div>
+                    <div class="datobarra3"><p>Lámina Galvanizada</p></div>
+                    <div class="datobarra4"><p>001</p></div>
+                    <div class="datobarra5"><p>¢2.500,00</p></div>
+                    <div class="datobarra6"><p>¢10.000,00</p></div>
+                </div>
+
+            </div>
+
+
+            <div class="conclusiones">
+
+                <div class="comentarios">
+                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsa excepturi vero ri totam, assumenda quidem eum unde deserunt omnis deleniti fugiat.
+                        </p>
+                </div>
+                <div class="totales">
+                    <div class="titulostotales">
+                        <div class="subtotal">Subtotal</div>
+                        <div class="deducciones">Deducciones</div>
+                        <div class="total">Total</div>
+                        <div class="iva">IV</div>
+                        <div class="grantotal">Gran Total</div>
+                    </div>
+                    <div class="valorestotales">
+                        <div class="subtotalvalor">¢1000</div>
+                        <div class="deduccionesvalor">¢120</div>
+                        <div class="totalvalor">¢980</div>
+                        <div class="ivavalor">¢121</div>
+                        <div class="grantotalvalor">¢1.023,23</div>
+                    </div>
+                </div>
+                
+            </div>
+
 </body>
 </html>
